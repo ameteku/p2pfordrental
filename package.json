@@ -2,7 +2,7 @@
   "name": "p2pfordrental",
   "version": "1.0.0",
   "description": "the peer to peer rental platform",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/ameteku/p2pfordrental/issues"
   },
-  "homepage": "https://github.com/ameteku/p2pfordrental#readme"
+  "homepage": "https://github.com/ameteku/p2pfordrental#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reactdom": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9"
+  }
 }
