@@ -6,35 +6,22 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   @JsonKey(ignore: true)
-  String id;
-  String userName;
-  String name;
-  int passCode;
-  bool isAdmin = false;
-  bool isApproved = false;
-  Map<String, String> usersAdded;
-  bool displayNumbers;
-  String phoneNumber;
-  User(
-      {this.displayNumbers,
-      this.phoneNumber,
-      this.userName,
-      this.name,
-      this.isAdmin = false,
-      this.passCode,
-      this.isApproved = false,
-      this.usersAdded});
+  String? id;
+  String? userName;
+  String? name;
+  String? email;
+  List<String>? carIds;
+  User({this.userName, this.name, this.id, this.carIds, this.email});
 
-  factory User.fromJson(Map json, String id) {
+  factory User.fromJson(Map<String, dynamic> json, String id) {
     User mc = _$UserFromJson(json);
     mc.id = id;
-    mc.displayNumbers = json['showNumbers'];
     return mc;
   }
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   String toString() {
-    return 'User{id: $id, userName: $userName, name: $name, passcode: $passCode, isAdmin: $isAdmin, isApproved: $isApproved}';
+    return 'User{id: $id, userName: $userName, name: $name, cardIds : $carIds, email: $email}';
   }
 }
