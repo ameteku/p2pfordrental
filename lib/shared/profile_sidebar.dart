@@ -13,23 +13,34 @@ class _ProfileSideBarState extends State<ProfileSideBar> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Container(
-      height: screenSize.height,
-      child: Column(
-        children: [
-          Center(
-            child: CircleAvatar(
-              child: Icon(Icons.person),
+    return Card(
+      //margin: EdgeInsets.only(right: 15, top: 5),
+
+      elevation: 7,
+      color: Color(0xFF534666).withOpacity(.6),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Center(
+              child: CircleAvatar(
+                backgroundColor: Color(0xFF138086),
+                maxRadius: 40,
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                ),
+              ),
             ),
-          ),
-          Text('Michael Ameteku'),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: [Text('Cars Owned: '), Text("20")],
-          )
-        ],
+            Text(widget.appState.currentUser?.name ?? 'Michael Ameteku'),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [Text('Cars Owned: '), Text(widget.appState.currentUser?.carIds?.length.toString() ?? "20")],
+            )
+          ],
+        ),
       ),
     );
   }

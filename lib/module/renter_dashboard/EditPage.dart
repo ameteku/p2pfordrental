@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/module/navigation/app_state.dart';
 import 'package:p2pfordrental/shared/all_cars_card.dart';
+import 'package:p2pfordrental/shared/car_detail_card.dart';
 import 'package:p2pfordrental/shared/consts.dart';
 import 'package:p2pfordrental/shared/map_card.dart';
 import 'package:p2pfordrental/shared/profile_sidebar.dart';
@@ -17,38 +18,67 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomSheet: kFooter,
-      appBar: MainAppBar(context),
-      body: widget.appState!.currentUser == null
-          ? SingleChildScrollView(
-              child: Container(
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    //todo : profile sidebar
-                    ProfileSideBar(appState: widget.appState),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            //todo : cars owned card( and cars card)
-                            CarCollection(
-                              appState: widget.appState,
-                              cars: [],
-                            ),
-                            //todo : map card
-                            MapCard(
-                              appState: widget.appState,
-                            )
-                          ],
-                        )
+      backgroundColor: Colors.black,
 
-                        //todo: car detail card
-                      ],
-                    )
-                  ],
-                ),
+      //bottomSheet: kFooter,
+      //appBar: MainAppBar(context),
+      body: widget.appState!.currentUser == null
+          ? Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Color(0xFFEEB462),
+                  Color(0xFF534666),
+                ]),
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                //scrollDirection: Axis.horizontal,
+                children: [
+                  //todo : profile sidebar
+                  ProfileSideBar(appState: widget.appState),
+                  Expanded(
+                    child: Container(
+                      color: Colors.black12,
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width * .7,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.6,
+                              width: MediaQuery.of(context).size.width * .9,
+                              child: Row(
+                                children: [
+                                  //todo : cars owned card( and cars card)
+                                  Container(
+                                    color: Colors.transparent,
+                                    width: MediaQuery.of(context).size.width * .7 * .4,
+                                    child: CarCollection(
+                                      appState: widget.appState,
+                                      cars: [],
+                                    ),
+                                  ),
+                                  //todo : map card
+                                  Expanded(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width * .7 * .6,
+                                      child: MapCard(
+                                        appState: widget.appState,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          //
+                          // //todo: car detail card
+                          Container(height: MediaQuery.of(context).size.height * .4, child: CarDetail(appState: widget.appState))
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             )
           : Container(

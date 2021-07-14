@@ -8,4 +8,6 @@ final BottomSheet kFooter = BottomSheet(
   onClosing: () {},
 );
 
+const int kMileageBound = 20;
+
 final Text kBrand = Text('P2PFords');

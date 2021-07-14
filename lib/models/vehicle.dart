@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:p2pfordrental/models/map_coordinates.dart';
 
 part 'vehicle.g.dart';
 
@@ -9,8 +10,11 @@ class Vehicle {
   String? name;
   String? vehicleId;
   String? owner;
+  int? oldMileage;
+  int? currentMileage;
+  MapCoordinates? currentLocation;
 
-  Vehicle({this.id, this.name, this.owner, this.vehicleId});
+  Vehicle({this.id, this.name, this.owner, this.vehicleId, this.currentMileage, this.oldMileage, this.currentLocation});
 
   factory Vehicle.fromJson(Map<String, dynamic> json, String id) {
     Vehicle temp = _$VehicleFromJson(json);

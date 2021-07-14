@@ -15,8 +15,13 @@ class _MapCardState extends State<MapCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height,
       child: Card(
-        child: Icon(Icons.map),
+        color: Color(0xFF534666).withOpacity(.6),
+        child: Icon(
+          Icons.map,
+          color: Colors.black,
+        ),
       ),
     );
   }

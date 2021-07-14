@@ -32,8 +32,9 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
               title: 'Flutter Demo',
               theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
+
+                  // primarySwatch: Color(0xFF138086),
+                  ),
               home: DashBoard(
                 appState: AppState(),
               ));

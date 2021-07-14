@@ -10,8 +10,9 @@ class User {
   String? userName;
   String? name;
   String? email;
+  String? phoneNumber;
   List<String>? carIds;
-  User({this.userName, this.name, this.id, this.carIds, this.email});
+  User({this.userName, this.name, this.id, this.carIds, this.email, this.phoneNumber});
 
   factory User.fromJson(Map<String, dynamic> json, String id) {
     User mc = _$UserFromJson(json);
