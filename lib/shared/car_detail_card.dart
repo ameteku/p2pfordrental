@@ -43,7 +43,7 @@ class _CarDetailState extends State<CarDetail> {
                     ),
                     Container(
                       alignment: Alignment.topRight,
-                      width: MediaQuery.of(context).size.width * .3,
+                      width: MediaQuery.of(context).size.width * .16,
                       child: RenteeCard(
                           rentee: User(name: "john", userName: "johhny", email: "@gmail.com", phoneNumber: "3307807220"),
                           mileageUsed: mileageUsed()),
@@ -81,21 +81,23 @@ class RenteeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color(0xFFEEB462).withOpacity(.6),
-      child: Column(
-        children: [
-          CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
-          Text(rentee!.name!),
-          ListTile(
-            leading: Text("Phone Number:"),
-            trailing: Text(rentee!.phoneNumber ?? "No number"),
-          ),
-          ListTile(
-            leading: Text("Amount due:"),
-            trailing: Text(amountDue().toString()),
-          )
-        ],
+    return Expanded(
+      child: Card(
+        color: Color(0xFFEEB462).withOpacity(.6),
+        child: Column(
+          children: [
+            CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
+            Text(rentee!.name!),
+            ListTile(
+              leading: Text("Phone Number:"),
+              trailing: Text(rentee!.phoneNumber ?? "No number"),
+            ),
+            ListTile(
+              leading: Text("Amount due:"),
+              trailing: Text(amountDue().toString()),
+            )
+          ],
+        ),
       ),
     );
   }
