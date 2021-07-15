@@ -10,7 +10,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     userName: json['userName'] as String,
     name: json['name'] as String,
-    carIds: (json['carIds'] as List)?.map((e) => e as String)?.toList(),
+    carIds: (json['carIds'] as List).map((e) => e as String).toList(),
     email: json['email'] as String,
   );
 }

@@ -24,17 +24,25 @@ class _ProfileSideBarState extends State<ProfileSideBar> {
           children: [
             Center(
               child: CircleAvatar(
+                backgroundImage: AssetImage("assets/cassandra-hamer-OCIicZ3Tfco-unsplash.jpg"),
                 backgroundColor: Color(0xFF138086),
                 maxRadius: 40,
-                child: Icon(
-                  Icons.person,
-                  size: 40,
-                ),
+                // child: Icon(
+                //   Icons.person,
+                //   size: 40,
+                // ),
               ),
             ),
-            Text(widget.appState.currentUser?.name ?? 'Michael Ameteku'),
-            SizedBox(
+            Divider(
               height: 5,
+              thickness: 20,
+              color: Colors.black,
+            ),
+            Text(widget.appState.currentUser?.name ?? 'Michael Ameteku'),
+            Divider(
+              height: 5,
+              thickness: 20,
+              color: Colors.white,
             ),
             Row(
               children: [Text('Cars Owned: '), Text(widget.appState.currentUser?.carIds?.length.toString() ?? "20")],

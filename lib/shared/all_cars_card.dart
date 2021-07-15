@@ -23,7 +23,12 @@ class _CarCollectionState extends State<CarCollection> {
             ? ListView.builder(
                 itemCount: widget.cars?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return CarCard(car: widget.cars![index]);
+                  return CarCard(
+                    car: widget.cars![index],
+                    onTap: () {
+                      widget.appState.car = widget.cars![index];
+                    },
+                  );
                 },
               )
             : Text('No cars yet...'),

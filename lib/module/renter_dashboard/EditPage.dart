@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/vehicle.dart';
+import 'package:p2pfordrental/module/login.dart';
 import 'package:p2pfordrental/module/navigation/app_state.dart';
 import 'package:p2pfordrental/shared/all_cars_card.dart';
 import 'package:p2pfordrental/shared/car_detail_card.dart';
@@ -17,14 +18,22 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   @override
+  void initState() {
+    super.initState();
+    widget.appState.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
 
       //bottomSheet: kFooter,
       //appBar: MainAppBar(context),
-      body: widget.appState!.status != null
-          ? (widget.appState!.status == UserStatus.Renter
+      body: widget.appState.status != null
+          ? (widget.appState.status == UserStatus.Renter
               ? Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
@@ -57,7 +66,10 @@ class _DashBoardState extends State<DashBoard> {
                                         width: MediaQuery.of(context).size.width * .7 * .4,
                                         child: CarCollection(
                                           appState: widget.appState,
-                                          cars: [Vehicle(name: "Ford Escape")],
+                                          cars: [
+                                            Vehicle(name: "Ford Escape", oldMileage: 70000, currentMileage: 75000),
+                                            Vehicle(name: "Ford Mustang", oldMileage: 75000, currentMileage: 77000),
+                                          ],
                                         ),
                                       ),
                                       //todo : map card
@@ -85,21 +97,12 @@ class _DashBoardState extends State<DashBoard> {
                 )
               : null) //todo: add rentee dashboard
           : Container(
-              color: Colors.black12,
+              height: MediaQuery.of(context).size.height,
+              color: Colors.white,
               child: FittedBox(
                 alignment: Alignment.center,
                 fit: BoxFit.fitWidth,
-                child: Center(
-                  child: Column(
-                    children: [
-                      Icon(Icons.tag_faces),
-                      Text(
-                        'Not Logged In,\n Waiting for Admins Approval',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
+                child: Center(child: LoginPage(appState: widget.appState)),
               ),
             ),
     );
@@ -117,7 +120,7 @@ class _DashBoardState extends State<DashBoard> {
       centerTitle: true,
       leading: Padding(
         padding: const EdgeInsets.only(top: 23.0, left: 10),
-        child: Text(widget.appState!.currentUser?.name ?? ''),
+        child: Text(widget.appState.currentUser?.name ?? ''),
       ),
       automaticallyImplyLeading: true,
       actions: [

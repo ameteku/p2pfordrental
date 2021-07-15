@@ -38,7 +38,7 @@ class _CarDetailState extends State<CarDetail> {
                           thickness: 2,
                           color: Colors.black12,
                         ),
-                        Text("Last Known location: ${carLocation() ?? "Not known"}")
+                        Text("Last Known location: ${carLocation()}")
                       ],
                     ),
                     Container(
@@ -81,23 +81,21 @@ class RenteeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        color: Color(0xFFEEB462).withOpacity(.6),
-        child: Column(
-          children: [
-            CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
-            Text(rentee!.name!),
-            ListTile(
-              leading: Text("Phone Number:"),
-              trailing: Text(rentee!.phoneNumber ?? "No number"),
-            ),
-            ListTile(
-              leading: Text("Amount due:"),
-              trailing: Text(amountDue().toString()),
-            )
-          ],
-        ),
+    return Card(
+      color: Color(0xFFEEB462).withOpacity(.6),
+      child: Column(
+        children: [
+          CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
+          Text(rentee.name!),
+          ListTile(
+            leading: Text("Phone Number:"),
+            trailing: Text(rentee.phoneNumber ?? "No number"),
+          ),
+          ListTile(
+            leading: Text("Amount due:"),
+            trailing: Text(amountDue().toString()),
+          )
+        ],
       ),
     );
   }

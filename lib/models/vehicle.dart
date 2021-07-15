@@ -13,8 +13,9 @@ class Vehicle {
   int? oldMileage;
   int? currentMileage;
   MapCoordinates? currentLocation;
+  String? imageUrl;
 
-  Vehicle({this.id, this.name, this.owner, this.vehicleId, this.currentMileage, this.oldMileage, this.currentLocation});
+  Vehicle({this.id, this.name, this.owner, this.vehicleId, this.currentMileage, this.oldMileage, this.currentLocation, this.imageUrl});
 
   factory Vehicle.fromJson(Map<String, dynamic> json, String id) {
     Vehicle temp = _$VehicleFromJson(json);

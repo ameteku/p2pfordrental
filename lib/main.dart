@@ -20,6 +20,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  final AppState _appState = AppState();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -35,7 +37,7 @@ class _MyAppState extends State<MyApp> {
                 primarySwatch: Colors.green,
               ),
               home: DashBoard(
-                appState: AppState(),
+                appState: _appState,
               ));
         }
 

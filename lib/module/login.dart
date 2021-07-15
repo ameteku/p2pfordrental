@@ -12,20 +12,32 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          OutlinedButton(
-            onPressed: () {
-              widget.appState.status = UserStatus.Renter;
-            },
-            child: Text("Renter"),
+          FittedBox(
+            fit: BoxFit.fitWidth,
+            child: OutlinedButton(
+              onPressed: () {
+                widget.appState.status = UserStatus.Renter;
+              },
+              child: Text(
+                "Renter",
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
           ),
           OutlinedButton(
             onPressed: () {
               widget.appState.status = UserStatus.Rentee;
             },
-            child: Text("Rentee"),
+            child: Text(
+              "Rentee",
+              style: TextStyle(fontSize: 30),
+            ),
           )
         ],
       ),
