@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:p2pfordrental/models/vehicle.dart';
+import 'package:pretty_json/pretty_json.dart';
 //refresh token, then make calls to for vehicle information
 
 //create stream for location retrieval
@@ -39,11 +41,16 @@ class ApiRepo {
   }
 
   void getVehicleInformation() {
-    client.get(urlConcat([basePath, vehicleInfo])).then((value) {
-      print(value.body);
-      dynamic vehicleItems = jsonDecode(value.body);
+    client.get(urlConcat([basePath, vehicleInfo]), headers: {
+      'Content-Type': 'application/json',
+    }).then((value) {
+      // print(value.body);
+      Map<dynamic, dynamic> vehicleItems = jsonDecode(value.body) as Map<dynamic, dynamic>;
+      //dynamic sec = jsonDecode(vehicleItems);
+      print("Items are ${vehicleItems.runtimeType}vehicleItems");
 
-      print("${vehicleItems["vehicle"][0]}");
+      //parse the info and get new data from the vehicle
+      //Vehicle()
     });
   }
 

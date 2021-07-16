@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/vehicle.dart';
 import 'package:p2pfordrental/module/login.dart';
 import 'package:p2pfordrental/module/navigation/app_state.dart';
+import 'package:p2pfordrental/module/rentee_dashboard/rentee_dash.dart';
 import 'package:p2pfordrental/repo/api_repo.dart';
 import 'package:p2pfordrental/shared/all_cars_card.dart';
 import 'package:p2pfordrental/shared/car_detail_card.dart';
@@ -28,7 +29,7 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.appState.status != null)
+    if (widget.appState.status != null) if (widget.appState.status == UserStatus.Renter)
       return Scaffold(
           backgroundColor: Colors.black,
           body: Container(
@@ -91,6 +92,8 @@ class _DashBoardState extends State<DashBoard> {
           )
           //todo: add rentee dashboard
           );
+    else
+      return RenteeDashBoard(appState: widget.appState);
 
     return Center(
         child: LoginPage(

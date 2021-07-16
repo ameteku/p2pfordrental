@@ -16,7 +16,14 @@ class AppState extends ChangeNotifier {
 
   UserStatus? _status;
 
-  Vehicle? _selectedCar = Vehicle(name: "Ford Escape", ownerId: "Ameteku", currentMileage: 2000000, oldMileage: 100000);
+  Vehicle? _selectedCar = Vehicle(
+    name: "Ford fusion",
+    ownerId: "Ameteku",
+    currentMileage: 150000,
+    oldMileage: 100000,
+    imageUrl:
+        "https://images.unsplash.com/photo-1582467029213-ce71667c2e28?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+  );
 
   ApiRepo appApis;
 

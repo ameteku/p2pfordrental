@@ -58,15 +58,16 @@ class _CarDetailState extends State<CarDetail> {
                           children: [
                             Expanded(child: VehicleInfo(context)),
                             Expanded(child: RentHistory(context)),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.topRight,
-                                width: MediaQuery.of(context).size.width * .16,
-                                child: RenteeCard(
-                                    rentee: User(name: "john", userName: "johhny", email: "@gmail.com", phoneNumber: "3307807220"),
-                                    mileageUsed: mileageUsed()),
-                              ),
-                            )
+                            if (widget.appState.status == UserStatus.Renter)
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.topRight,
+                                  width: MediaQuery.of(context).size.width * .16,
+                                  child: RenteeCard(
+                                      rentee: User(name: "john", userName: "johhny", email: "@gmail.com", phoneNumber: "3307807220"),
+                                      mileageUsed: mileageUsed()),
+                                ),
+                              )
                           ],
                         )
                       ],
@@ -177,7 +178,7 @@ class _CarDetailState extends State<CarDetail> {
     MapCoordinates? coordinates = widget.appState.car?.currentLocation;
     print("converting coordinates");
     if (coordinates == null) {
-      return "No location found";
+      return "12.00, 30.6";
     }
 
     return "Working on google api";

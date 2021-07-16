@@ -55,7 +55,23 @@ class _ProfileSideBarState extends State<ProfileSideBar> {
               color: Colors.white,
             ),
             Row(
-              children: [Text('Cars Owned: '), Text(widget.appState.currentUser?.carIds?.length.toString() ?? "20")],
+              children: [
+                Text(widget.appState.status == UserStatus.Renter ? 'Cars Owned: ' : 'Cars Rented'),
+                Text(widget.appState.currentUser?.carIds?.length.toString() ?? "1")
+              ],
+            ),
+            Divider(
+              height: 5,
+              thickness: 20,
+              color: Colors.white,
+            ),
+            OutlineButton(
+              child: Text("Logout"),
+              onPressed: () {
+                widget.appState.status = null;
+                widget.appState.currentUser = null;
+                setState(() {});
+              },
             )
           ],
         ),

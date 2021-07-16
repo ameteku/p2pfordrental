@@ -21,11 +21,31 @@ class UserRepo extends FireStoreBaseRepo {
 
   //gets the vehicles
   Future<List<Vehicle>?> getUserVehicles(String id) async {
-    List<Vehicle> cars;
+    List<Vehicle>? cars;
     await FireStoreBaseRepo.db().collection(carPath).where('ownerId', isEqualTo: id).get().then((value) {
-      return value.docs.map((e) => Vehicle.fromJson(e.data(), e.id)).toList();
+      cars = value.docs.map((e) => Vehicle.fromJson(e.data(), e.id)).toList();
     });
-
+    cars?.addAll(
+      [
+        Vehicle(
+          name: "Ford Truck",
+          oldMileage: 70000,
+          currentMileage: 75000,
+          rented: false,
+          imageUrl:
+              "https://images.unsplash.com/photo-1551830820-330a71b99659?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+        ),
+        Vehicle(
+          name: "Ford fusion",
+          ownerId: "Ameteku",
+          currentMileage: 150000,
+          oldMileage: 100000,
+          imageUrl:
+              "https://images.unsplash.com/photo-1582467029213-ce71667c2e28?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+        )
+      ],
+    );
+    return cars;
     // return cars;
   }
 

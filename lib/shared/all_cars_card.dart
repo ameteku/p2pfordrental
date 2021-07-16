@@ -30,7 +30,7 @@ class _CarCollectionState extends State<CarCollection> {
             children: [
               Container(
                 child: Text(
-                  "Owned Cars",
+                  widget.appState.status == UserStatus.Renter ? "Owned Cars" : "Available Cars",
                   style: kheadingStyle(),
                   textAlign: TextAlign.center,
                 ),
@@ -49,10 +49,11 @@ class _CarCollectionState extends State<CarCollection> {
                     future: UserRepo().getUserVehicles(widget.appState.currentUser!.id!),
                     initialData: [
                       Vehicle(
-                        currentMileage: 20000,
-                        oldMileage: 170000,
-                        name: "Ford mustang",
-                      )
+                          currentMileage: 20000,
+                          oldMileage: 170000,
+                          name: "Ford mustang",
+                          imageUrl:
+                              "https://images.unsplash.com/photo-1582467029213-ce71667c2e28?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"),
                     ],
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data != null) {
