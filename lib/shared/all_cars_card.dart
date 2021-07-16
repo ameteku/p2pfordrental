@@ -6,7 +6,11 @@ import 'package:p2pfordrental/shared/car_card.dart';
 class CarCollection extends StatefulWidget {
   final AppState appState;
   final List<Vehicle>? cars;
-  const CarCollection({Key? key, required this.appState, this.cars}) : super(key: key);
+  const CarCollection({
+    Key? key,
+    required this.appState,
+    this.cars,
+  }) : super(key: key);
 
   @override
   _CarCollectionState createState() => _CarCollectionState();

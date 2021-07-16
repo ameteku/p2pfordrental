@@ -3,7 +3,8 @@ import 'package:p2pfordrental/module/navigation/app_state.dart';
 
 class LoginPage extends StatefulWidget {
   final AppState appState;
-  const LoginPage({Key? key, required this.appState}) : super(key: key);
+  final Function callback;
+  const LoginPage({Key? key, required this.callback, required this.appState}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
             child: OutlinedButton(
               onPressed: () {
                 widget.appState.status = UserStatus.Renter;
+                widget.callback();
               },
               child: Text(
                 "Renter",
@@ -33,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           OutlinedButton(
             onPressed: () {
               widget.appState.status = UserStatus.Rentee;
+              widget.callback();
             },
             child: Text(
               "Rentee",

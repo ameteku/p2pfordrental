@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/map_coordinates.dart';
 import 'package:p2pfordrental/models/user.dart';
@@ -21,40 +23,129 @@ class _CarDetailState extends State<CarDetail> {
       color: Color(0xFF534666).withOpacity(.6),
       elevation: 5,
       child: widget.appState.car != null
-          ? Column(
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //this takes the car name(model)
-                SizedBox(
-                  child: Text(widget.appState.car!.name!),
+                Container(
+                  color: Colors.black,
+                  padding: EdgeInsets.all(5),
+                  child: Card(
+                    color: Colors.green,
+                    margin: EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: Image.network(
+                      widget.appState.car!.imageUrl ??
+                          "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?ixid=Mnwx"
+                              "MjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w"
+                              "=1534&q=80",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
+                Expanded(
+                  child: Container(
+                    //width: window.physicalSize.width * ,
+                    padding: EdgeInsets.all(10),
+                    child: Column(
                       children: [
-                        Text("Mileage Used: ${mileageUsed()}"),
-                        Divider(
-                          height: 5,
-                          thickness: 2,
-                          color: Colors.black12,
-                        ),
-                        Text("Last Known location: ${carLocation()}")
+                        //this takes the car name(model)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: VehicleInfo(context)),
+                            Expanded(child: RentHistory(context)),
+                            Expanded(
+                              child: Container(
+                                alignment: Alignment.topRight,
+                                width: MediaQuery.of(context).size.width * .16,
+                                child: RenteeCard(
+                                    rentee: User(name: "john", userName: "johhny", email: "@gmail.com", phoneNumber: "3307807220"),
+                                    mileageUsed: mileageUsed()),
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      width: MediaQuery.of(context).size.width * .16,
-                      child: RenteeCard(
-                          rentee: User(name: "john", userName: "johhny", email: "@gmail.com", phoneNumber: "3307807220"),
-                          mileageUsed: mileageUsed()),
-                    )
-                  ],
-                )
+                  ),
+                ),
               ],
             )
           : Center(
               child: Text('Select a Car :)'),
             ),
+    );
+  }
+
+  Container RentHistory(BuildContext context) {
+    return Container(
+      // alignment: Alignment.topLeft,
+      decoration: BoxDecoration(border: Border(right: BorderSide(width: 3))),
+      child: Column(
+        children: [
+          Text(
+            "Rent history",
+            style: kheadingStyle(),
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: MediaQuery.of(context).size.height * .3,
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Card(
+                margin: EdgeInsets.all(5),
+                child: ListTile(
+                  tileColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  title: Text("Mileage:"
+                      "\$200.00"),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage("https://images.unsplash.com/photo-1513594979850-55e46e3e1555?ixid=Mnwx"
+                        "MjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1."
+                        "2.1&auto=format&fit=crop&w=1350&q=80"),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container VehicleInfo(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * .3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Text(
+              "Vehicle Information",
+              style: kheadingStyle(),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.only(bottom: 7),
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3,
+              ),
+            )),
+          ),
+          Text("Model: " + widget.appState.car!.name!),
+          Text("Mileage Used: ${mileageUsed()}"),
+          Text("Last Known location: ${carLocation()}")
+        ],
+      ),
+      decoration: BoxDecoration(border: Border(right: BorderSide(width: 3))),
     );
   }
 
@@ -74,6 +165,13 @@ class _CarDetailState extends State<CarDetail> {
   }
 }
 
+TextStyle kheadingStyle() {
+  return TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+}
+
 class RenteeCard extends StatelessWidget {
   final User rentee;
   final int mileageUsed;
@@ -81,12 +179,30 @@ class RenteeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color(0xFFEEB462).withOpacity(.6),
+    return Container(
+      height: MediaQuery.of(context).size.height * .35,
       child: Column(
         children: [
+          Container(
+            child: Text(
+              "Current Rentee",
+              style: kheadingStyle(),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.only(bottom: 7),
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3,
+              ),
+            )),
+          ),
           CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
-          Text(rentee.name!),
+          ListTile(
+            leading: Text("Rentee:"),
+            trailing: Text(rentee.name!),
+          ),
           ListTile(
             leading: Text("Phone Number:"),
             trailing: Text(rentee.phoneNumber ?? "No number"),

@@ -20,7 +20,9 @@ class CarCard extends StatelessWidget {
         tileColor: Color(0xFFDC8665),
         leading: CircleAvatar(
           backgroundImage: NetworkImage(car.imageUrl ??
-              "https://www.ford.com/cmslibs/content/dam/vdm_ford/live/en_us/ford/nameplate/maverick/2022/collections/3-2/P758_Hybrid_XLT_08_219.jpg/_jcr_content/renditions/cq5dam.web.1440.1440.jpeg"),
+              "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?ixid=Mnwx"
+                  "MjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w"
+                  "=1534&q=80"),
         ),
         title: Text(car.name!),
       ),
