@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/module/navigation/app_state.dart';
+import 'package:p2pfordrental/repo/user_repo.dart';
 
 class LoginPage extends StatefulWidget {
   final AppState appState;
@@ -22,8 +23,10 @@ class _LoginPageState extends State<LoginPage> {
           FittedBox(
             fit: BoxFit.fitWidth,
             child: OutlinedButton(
-              onPressed: () {
+              onPressed: () async {
+                widget.appState.currentUser = await UserRepo().getUser('renter');
                 widget.appState.status = UserStatus.Renter;
+                print(widget.appState.currentUser);
                 widget.callback();
               },
               child: Text(
@@ -33,8 +36,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           OutlinedButton(
-            onPressed: () {
+            onPressed: () async {
+              widget.appState.currentUser = await UserRepo().getUser('rentee');
               widget.appState.status = UserStatus.Rentee;
+
               widget.callback();
             },
             child: Text(

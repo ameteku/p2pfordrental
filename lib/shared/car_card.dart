@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/vehicle.dart';
+import 'package:p2pfordrental/repo/user_repo.dart';
 
 class CarCard extends StatelessWidget {
   final Vehicle car;
@@ -25,6 +26,13 @@ class CarCard extends StatelessWidget {
                   "=1534&q=80"),
         ),
         title: Text(car.name!),
+        trailing: Switch(
+          onChanged: (value) {
+            UserRepo().updateVehicle(car);
+            car.rented = value;
+          },
+          value: car.rented,
+        ),
       ),
     );
   }

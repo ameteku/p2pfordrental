@@ -87,9 +87,20 @@ class _CarDetailState extends State<CarDetail> {
       decoration: BoxDecoration(border: Border(right: BorderSide(width: 3))),
       child: Column(
         children: [
-          Text(
-            "Rent history",
-            style: kheadingStyle(),
+          Container(
+            child: Text(
+              "Rent history",
+              style: kheadingStyle(),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.only(bottom: 7),
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3,
+              ),
+            )),
           ),
           Container(
             alignment: Alignment.center,
@@ -123,10 +134,20 @@ class _CarDetailState extends State<CarDetail> {
     return Container(
       child: Column(
         children: [
-          Text(
-            "Vehicle Information",
-            style: kheadingStyle(),
-            textAlign: TextAlign.center,
+          Container(
+            child: Text(
+              "Vehicle Information",
+              style: kheadingStyle(),
+              textAlign: TextAlign.center,
+            ),
+            margin: EdgeInsets.only(bottom: 7),
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(
+                color: Colors.black,
+                width: 3,
+              ),
+            )),
           ),
           Container(
             // height: MediaQuery.of(context).size.height * .3,

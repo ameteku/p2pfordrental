@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/vehicle.dart';
 import 'package:p2pfordrental/module/login.dart';
 import 'package:p2pfordrental/module/navigation/app_state.dart';
+import 'package:p2pfordrental/repo/api_repo.dart';
 import 'package:p2pfordrental/shared/all_cars_card.dart';
 import 'package:p2pfordrental/shared/car_detail_card.dart';
 import 'package:p2pfordrental/shared/consts.dart';
@@ -17,9 +18,12 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  ApiRepo? apiRepo;
+
   @override
   void initState() {
     super.initState();
+    apiRepo = ApiRepo();
     widget.appState.addListener(() {
       setState(() {});
     });
@@ -41,7 +45,6 @@ class _DashBoardState extends State<DashBoard> {
             child: Row(
               //scrollDirection: Axis.horizontal,
               children: [
-                //todo : profile sidebar
                 ProfileSideBar(appState: widget.appState),
                 Expanded(
                   child: Container(
@@ -57,19 +60,13 @@ class _DashBoardState extends State<DashBoard> {
                             width: MediaQuery.of(context).size.width * .9,
                             child: Row(
                               children: [
-                                //todo : cars owned card( and cars card)
                                 Container(
                                   color: Colors.transparent,
                                   width: MediaQuery.of(context).size.width * .7 * .4,
                                   child: CarCollection(
                                     appState: widget.appState,
-                                    cars: [
-                                      Vehicle(name: "Ford Escape", oldMileage: 70000, currentMileage: 75000),
-                                      Vehicle(name: "Ford Mustang", oldMileage: 75000, currentMileage: 77000),
-                                    ],
                                   ),
                                 ),
-                                //todo : map card
                                 Expanded(
                                   child: Container(
                                     width: MediaQuery.of(context).size.width * .7 * .6,
@@ -82,8 +79,6 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                           ),
                         ),
-                        //
-                        // //todo: car detail card
                         Expanded(
                           child: Container(
                             height: MediaQuery.of(context).size.height * .4,

@@ -11,6 +11,16 @@ class ProfileSideBar extends StatefulWidget {
 
 class _ProfileSideBarState extends State<ProfileSideBar> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    widget.appState.addListener(() {
+      widget.appState.currentUser = widget.appState.currentUser;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Card(

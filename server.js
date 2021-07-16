@@ -86,7 +86,10 @@ app.get('/refresh', (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/oauth.html');
+  updateAccessToken();
+  res.send(JSON.stringify("Getting token"));
+  
+  //res.sendFile(__dirname + '/oauth.html');
 });
 
 app.get('/vehicle_info', (req, mainRes) => {

@@ -12,7 +12,7 @@ class AppState extends ChangeNotifier {
 
   UserStatus? _status;
 
-  Vehicle? _selectedCar = Vehicle(name: "Ford Escape", owner: "Ameteku", currentMileage: 2000000, oldMileage: 100000);
+  Vehicle? _selectedCar = Vehicle(name: "Ford Escape", ownerId: "Ameteku", currentMileage: 2000000, oldMileage: 100000);
 
   User? get currentUser => _loggedInUser;
   set currentUser(User? user) {
