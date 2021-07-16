@@ -78,6 +78,10 @@ class _CarCollectionState extends State<CarCollection> {
                           child: Text('No cars yet.. checking with ford'),
                         );
                       }
+
+                      return Center(
+                        child: Text('No cars yet'),
+                      );
                     }),
               ),
             ],

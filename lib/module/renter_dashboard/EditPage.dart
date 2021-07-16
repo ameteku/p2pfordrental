@@ -18,12 +18,9 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  ApiRepo? apiRepo;
-
   @override
   void initState() {
     super.initState();
-    apiRepo = ApiRepo();
     widget.appState.addListener(() {
       setState(() {});
     });
