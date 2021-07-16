@@ -4,7 +4,7 @@ import 'package:p2pfordrental/models/vehicle.dart';
 
 enum UserStatus { Renter, Rentee }
 
-class AppState {
+class AppState extends ChangeNotifier {
   User? _loggedInUser = User(
     name: "Michael Ameteku",
     phoneNumber: "3307807220",
@@ -22,8 +22,11 @@ class AppState {
 
   Vehicle? get car => _selectedCar;
   set car(Vehicle? vehicle) {
-    car = vehicle;
-    // notifyListeners();
+    print(" in function");
+    _selectedCar = vehicle;
+
+    print("Done setting in function");
+    notifyListeners();
   }
 
   UserStatus? get status => _status;

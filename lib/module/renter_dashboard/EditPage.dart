@@ -18,8 +18,16 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   @override
+  void initState() {
+    super.initState();
+    widget.appState.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (widget.appState.currentUser != null)
+    if (widget.appState.status != null)
       return Scaffold(
           backgroundColor: Colors.black,
           body: Container(
@@ -43,6 +51,7 @@ class _DashBoardState extends State<DashBoard> {
                     child: Column(
                       children: [
                         Expanded(
+                          flex: 1,
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.6,
                             width: MediaQuery.of(context).size.width * .9,
@@ -75,9 +84,11 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         //
                         // //todo: car detail card
-                        Container(
-                          height: MediaQuery.of(context).size.height * .4,
-                          child: CarDetail(appState: widget.appState),
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * .4,
+                            child: CarDetail(appState: widget.appState),
+                          ),
                         )
                       ],
                     ),

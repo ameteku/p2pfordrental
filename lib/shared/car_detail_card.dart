@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:p2pfordrental/models/map_coordinates.dart';
 import 'package:p2pfordrental/models/user.dart';
@@ -92,13 +93,13 @@ class _CarDetailState extends State<CarDetail> {
           ),
           Container(
             alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height * .3,
+            height: MediaQuery.of(context).size.height * .35,
             child: ListView.builder(
               itemCount: 5,
               itemBuilder: (context, index) => Card(
                 margin: EdgeInsets.all(5),
                 child: ListTile(
-                  tileColor: Colors.deepPurple,
+                  tileColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
@@ -120,29 +121,26 @@ class _CarDetailState extends State<CarDetail> {
 
   Container VehicleInfo(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .3,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            child: Text(
-              "Vehicle Information",
-              style: kheadingStyle(),
-              textAlign: TextAlign.center,
-            ),
-            margin: EdgeInsets.only(bottom: 7),
-            decoration: BoxDecoration(
-                border: Border(
-              bottom: BorderSide(
-                color: Colors.black,
-                width: 3,
-              ),
-            )),
+          Text(
+            "Vehicle Information",
+            style: kheadingStyle(),
+            textAlign: TextAlign.center,
           ),
-          Text("Model: " + widget.appState.car!.name!),
-          Text("Mileage Used: ${mileageUsed()}"),
-          Text("Last Known location: ${carLocation()}")
+          Container(
+            // height: MediaQuery.of(context).size.height * .3,
+            child: ListView(
+              shrinkWrap: true,
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KeyValueTile("Model:", widget.appState.car!.name!),
+                KeyValueTile("Last Known location:", "${carLocation()}"),
+                KeyValueTile("Mileage Used:", mileageUsed().toString()),
+                KeyValueTile("Total Mileage:", widget.appState.car!.currentMileage.toString())
+              ],
+            ),
+          ),
         ],
       ),
       decoration: BoxDecoration(border: Border(right: BorderSide(width: 3))),
@@ -165,6 +163,18 @@ class _CarDetailState extends State<CarDetail> {
   }
 }
 
+Padding KeyValueTile(String key, String value) {
+  return Padding(
+    padding: const EdgeInsets.all(5),
+    child: ListTile(
+      tileColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+      title: Text(key),
+      trailing: Text(value),
+    ),
+  );
+}
+
 TextStyle kheadingStyle() {
   return TextStyle(
     fontWeight: FontWeight.bold,
@@ -180,7 +190,7 @@ class RenteeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .35,
+      height: MediaQuery.of(context).size.height * .4,
       child: Column(
         children: [
           Container(
@@ -199,18 +209,9 @@ class RenteeCard extends StatelessWidget {
             )),
           ),
           CircleAvatar(backgroundColor: Color(0xFF138086), child: Icon(Icons.person)),
-          ListTile(
-            leading: Text("Rentee:"),
-            trailing: Text(rentee.name!),
-          ),
-          ListTile(
-            leading: Text("Phone Number:"),
-            trailing: Text(rentee.phoneNumber ?? "No number"),
-          ),
-          ListTile(
-            leading: Text("Amount due:"),
-            trailing: Text(amountDue().toString()),
-          )
+          KeyValueTile("Rentee:", rentee.name!),
+          KeyValueTile("Phone Number:", rentee.phoneNumber ?? "No number"),
+          KeyValueTile("Amount due: ", '\$' + amountDue().toString())
         ],
       ),
     );

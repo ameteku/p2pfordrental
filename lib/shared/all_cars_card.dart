@@ -5,11 +5,11 @@ import 'package:p2pfordrental/shared/car_card.dart';
 
 class CarCollection extends StatefulWidget {
   final AppState appState;
-  final List<Vehicle>? cars;
+  final List<Vehicle> cars;
   const CarCollection({
     Key? key,
     required this.appState,
-    this.cars,
+    required this.cars,
   }) : super(key: key);
 
   @override
@@ -25,13 +25,17 @@ class _CarCollectionState extends State<CarCollection> {
         color: Color(0xFF534666).withOpacity(.6),
         child: widget.cars != null
             ? ListView.builder(
-                itemCount: widget.cars?.length ?? 0,
+                itemCount: widget.cars.length,
                 itemBuilder: (context, index) {
-                  return CarCard(
-                    car: widget.cars![index],
-                    onTap: () {
-                      widget.appState.car = widget.cars![index];
+                  return GestureDetector(
+                    onDoubleTap: () {
+                      print("Setting car");
+                      widget.appState.car = widget.cars[index];
+                      print("done setting car");
                     },
+                    child: CarCard(
+                      car: widget.cars[0],
+                    ),
                   );
                 },
               )
